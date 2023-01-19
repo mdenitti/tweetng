@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+a.register {
+    color:red;
+    float: right;
+}
+
+.col.login {
+    background-color: rgba(250, 235, 215, 0);
+    padding: 60px;
+    border-radius: 4px;
+    margin-top: 20px;
+    /* make a box shadow black */
+    box-shadow: 0 0 10px rgb(221, 221, 221);
+    /* make a fixed width of 400px and center */
+    max-width: 600px;
+    margin: 0 auto;
+    /* set background url and fade it */
+    background: url(https://media.istockphoto.com/id/1236824686/vector/abstract-white-square-shape-with-futuristic-concept-background-space-for-your-design.jpg?s=612x612&w=0&k=20&c=KTnnHX0TUbRKVXZY7rqNGdVy2j-NOiQW84zxgn9iNFE=);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    background-blend-mode: multiply;
+    /* set a background color */
+   
+    
+
+
+}
+
+button.btn.btn-primary.login {
+    background-color: black;
+    border-color: white;
+}
+
+label.form-label {
+    /* background-color: aqua; */
+    display: block;
+    padding: 5px;
+    font-size: 12px;
+    margin-bottom: -50px;
+    margin-right:7px;
+    float: right;
+}
+
+input.form-control {
+    padding: 17px;
+}
+
+h1.main {
+    font-weight: 200;
+    margin-bottom: 24px;
+    display: block;
+}
