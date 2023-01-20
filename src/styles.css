@@ -68,3 +68,19 @@ h1.main {
     margin-bottom: 24px;
     display: block;
 }
+p.chat {
+    background-color: #eaeaea;
+    padding: 6px;
+    border-radius: 3px;
+}
+span.chatname {
+    background-color: yellowgreen;
+    padding: 4px;
+    margin-right: -10px;
+    border-radius: 3px;
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+    float: right;
+    margin-top: -1px;
+}

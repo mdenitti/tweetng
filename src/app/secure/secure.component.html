@@ -10,14 +10,14 @@
             <input type="text" class="form-control" [(ngModel)]="newMessage" (keyup.enter)="addMessage()">
 
         
-
+            {{_messages | json}}}
 
             <a class="register" (click)="logout()">Logout</a>
 
 
             <div class="chatsframe">
                 <p class="chat" *ngFor="let _message of _messages">
-                    <span class="chatname">{{_message.name}} </span>
+                    <span class="chatname">{{_message.name}}</span>
                     <span class="chatmessage">{{_message.content}} </span>
                 </p>
 
