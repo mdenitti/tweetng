@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-secure',
@@ -9,11 +10,28 @@ import { Router } from '@angular/router';
 })
 export class SecureComponent {
 
-  constructor(private authService: AuthService, private router:Router) { }
+
+newMessage: string;
+_messages: any;
+
+  constructor(private authService: AuthService, private router:Router, private chatService: ChatService) {
+    this.newMessage = '';
+   }
 
 logout() {
 this.authService.logout();
 this.router.navigate(['/login']);
+}
+
+addMessage() {
+ // this.chatService.addMessage(this.newMessage);
+  }
+
+ngOnInit() {
+  this.chatService.getChatsFromApi().then(result => {
+    console.log(result);
+    this._messages = result;
+  })
 }
 
 }

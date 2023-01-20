@@ -11,9 +11,13 @@ export class ChatService {
 
   constructor(private router:Router) { }
 
+
   getChatsFromApi() {
     return fetch('http://localhost:8000/api/chats')
-      .then(response => response.json())
+      .then(response => {
+        console.log(response)
+        return response.json()
+      })
   }
 
   register(name:string,email:string,password:string) {

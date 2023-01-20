@@ -22,9 +22,26 @@ a.register {
     background-blend-mode: multiply;
     /* set a background color */
    
-    
+}
 
+.col.secure {
+    background-color: rgba(250, 235, 215, 0);
+    padding: 60px;
+    border-radius: 4px;
+    margin-top: 20px;
+    /* make a box shadow black */
+    box-shadow: 0 0 10px rgb(221, 221, 221);
+    /* make a fixed width of 400px and center */
+    max-width: 1000px;
+    margin: 0 auto;
+    /* set background url and fade it */
+    background: url(https://media.istockphoto.com/id/1236824686/vector/abstract-white-square-shape-with-futuristic-concept-background-space-for-your-design.jpg?s=612x612&w=0&k=20&c=KTnnHX0TUbRKVXZY7rqNGdVy2j-NOiQW84zxgn9iNFE=);
+    background-size: cover;
+    background-repeat: no-repeat;
 
+    background-blend-mode: multiply;
+    /* set a background color */
+   
 }
 
 button.btn.btn-primary.login {
