@@ -11,11 +11,13 @@ export class RegistrationComponent {
   name: string;
   password: string;
   email: string;
+  profile: any;
 
   constructor(private chatService: ChatService) {
     this.name = '';
     this.password = '';
     this.email = '';
+    this.profile = '';
   }
 
   register() {

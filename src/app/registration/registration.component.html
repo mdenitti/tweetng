@@ -23,6 +23,12 @@
             <input type="password" class="form-control" [(ngModel)]="password">
             
           </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Profile picture</label>
+            <input type="file" class="form-control" [(ngModel)]="profile">
+            
+          </div>
      
           <button (click)="register()" type="submit" class="btn btn-primary login">Register</button>
        
