@@ -14,10 +14,12 @@ export class SecureComponent {
 newChat: string;
 _messages: any;
 userId: any;
+username: any;
 
   constructor(private authService: AuthService, private router:Router, private chatService: ChatService) {
     this.newChat = '';
     this.userId = window.localStorage.getItem('userId');
+    this.username = window.localStorage.getItem('username');
    }
 
 logout() {
