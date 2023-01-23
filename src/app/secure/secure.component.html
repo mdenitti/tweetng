@@ -6,19 +6,17 @@
         </div>
         <h1 class="main">welcome</h1>
         <div class="mb-3">
+            <a href="" class="register" (click)="logout()">Logout</a>
             <label for="exampleInputEmail1" class="form-label">add message and press enter</label>
-            <input type="text" class="form-control" [(ngModel)]="newMessage" (keyup.enter)="addMessage()">
-
-        
+            <input type="text" class="form-control keyup" [(ngModel)]="newChat" (keyup.enter)="addChat()">
            
-
-            <a class="register" (click)="logout()">Logout</a>
-
-
             <div class="chatsframe">
                 <p class="chat" *ngFor="let _message of _messages">
                     <span class="chatname">{{_message.name}}</span>
-                    <span class="chatmessage">{{_message.content}} </span>
+                    <span class="chatmessage">
+                        <button *ngIf="userId == _message.userId" (click)='deleteChat(_message.id)' class="btn btn-danger btn-sm"> x </button>
+                        {{_message.content}}
+                    </span>
                 </p>
 
 

@@ -11,11 +11,13 @@ import { ChatService } from '../chat.service';
 export class SecureComponent {
 
 
-newMessage: string;
+newChat: string;
 _messages: any;
+userId: any;
 
   constructor(private authService: AuthService, private router:Router, private chatService: ChatService) {
-    this.newMessage = '';
+    this.newChat = '';
+    this.userId = window.localStorage.getItem('userId');
    }
 
 logout() {
@@ -23,9 +25,21 @@ this.authService.logout();
 this.router.navigate(['/login']);
 }
 
-addMessage() {
- // this.chatService.addMessage(this.newMessage);
+addChat() {
+  this.chatService.addChat(this.newChat).then(result => {
+    // refresh the list
+    this.ngOnInit();
+    // clear the input field
+    this.newChat = '';
+  });
   }
+
+  deleteChat(id:number) {
+    this.chatService.deleteChat(id).then(result => {
+      // refresh the list
+      this.ngOnInit();
+    });
+    }
 
 ngOnInit() {
   this.chatService.getChatsFromApi().then(result => {

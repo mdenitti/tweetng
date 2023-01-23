@@ -84,3 +84,7 @@ span.chatname {
     float: right;
     margin-top: -1px;
 }
+
+input.form-control.keyup {
+    margin-bottom: 17px;
+}
