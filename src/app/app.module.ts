@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SecureComponent } from './secure/secure.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { RegistrationComponent } from './registration/registration.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as bcrypt from 'bcryptjs';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class ChatService {
 }
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private toastr: ToastrService) { }
 
   addChat(message: string) {
     // check if object is properly created
@@ -37,7 +37,7 @@ export class ChatService {
           // display a succes message to the user - optional
           // alert("Message added");
         } else {
-          alert("Something went wrong");
+          this.toastr.warning('Whoops', 'Something went wrong');
         }
       })
   }
@@ -83,8 +83,12 @@ export class ChatService {
   getUsersFromApi(username: string, password: string) {
     console.log(username, password);
     fetch('http://localhost:8000/api/users/' + username)
-      .then(response => response.json())
+      .then(response => {
+        if(!response.ok) throw new Error(response.statusText);
+        return response.json();
+      })
       .then(data => {
+        if(!data[0]) throw new Error("User not found");
         console.log(data[0].password);
         bcrypt.compare(password, data[0].password, (err, res) => {
           if (res) {
@@ -92,10 +96,16 @@ export class ChatService {
             window.localStorage.setItem('userId', data[0].id);
             this.router.navigate(['/secure']);
           } else {
-            alert("Wrong password");
+            this.toastr.warning('Whoops', 'Something went wrong');
           }
         });
       })
-  };
+      .catch(error => {
+        if(error.message === "User not found") this.toastr.error('User not found', 'Unable to login');
+        else this.toastr.error('Error', 'An error occured');
+      });
+  }
+
+
 
 }
