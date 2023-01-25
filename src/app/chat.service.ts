@@ -7,9 +7,13 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class ChatService {
+
+  url: string = 'https://hellocode.be/tweet/public/api';
+
+
   deleteChat(id: number) {
-    return fetch('http://localhost:8000/api/chats/'+id, {method: 'DELETE'})
-}
+    return fetch(this.url + '/chats/' + id, { method: 'DELETE' })
+  }
 
 
   constructor(private router: Router, private toastr: ToastrService) { }
@@ -21,7 +25,7 @@ export class ChatService {
       user_id: window.localStorage.getItem('userId')
     }));
     // fetch the API in post mode
-    return fetch('http://localhost:8000/api/chats', {
+    return fetch(this.url + '/chats', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -43,7 +47,7 @@ export class ChatService {
   }
 
   getChatsFromApi() {
-    return fetch('http://localhost:8000/api/chats')
+    return fetch(this.url + '/chats')
       .then(response => {
         console.log(response)
         return response.json()
@@ -57,7 +61,7 @@ export class ChatService {
       email: email,
       password: password
     }));
-    fetch('http://localhost:8000/api/users', {
+    fetch(this.url + '/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -71,10 +75,10 @@ export class ChatService {
       .then(response => {
         console.log(response.status);
         if (response.status == 201) {
-          alert("Registration successful");
+          this.toastr.success('yay', 'You have been registered');
           this.router.navigate(['/login']);
         } else {
-          alert("Something went wrong");
+          this.toastr.warning('Whoops', 'Something went wrong');
         }
       })
   }
@@ -82,13 +86,13 @@ export class ChatService {
 
   getUsersFromApi(username: string, password: string) {
     console.log(username, password);
-    fetch('http://localhost:8000/api/users/' + username)
+    fetch(this.url + '/users/' + username)
       .then(response => {
-        if(!response.ok) throw new Error(response.statusText);
+        if (!response.ok) throw new Error(response.statusText);
         return response.json();
       })
       .then(data => {
-        if(!data[0]) throw new Error("User not found");
+        if (!data[0]) throw new Error("User not found");
         console.log(data[0].password);
         bcrypt.compare(password, data[0].password, (err, res) => {
           if (res) {
@@ -101,11 +105,8 @@ export class ChatService {
         });
       })
       .catch(error => {
-        if(error.message === "User not found") this.toastr.error('User not found', 'Unable to login');
+        if (error.message === "User not found") this.toastr.error('User not found', 'Unable to login');
         else this.toastr.error('Error', 'An error occured');
       });
   }
-
-
-
 }

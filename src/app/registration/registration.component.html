@@ -26,7 +26,12 @@
 
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Profile picture</label>
-            <input type="file" class="form-control" [(ngModel)]="profile">
+            <!-- input file type onchange acces method and pass the event  -->
+            <input type="file" class="form-control" (change)="onFileSelected($event)">
+            
+            
+             
+
             
           </div>
      
