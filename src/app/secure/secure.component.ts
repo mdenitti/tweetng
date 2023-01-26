@@ -12,39 +12,41 @@ import { ToastrService } from 'ngx-toastr';
 export class SecureComponent {
 
 
-newChat: string;
-_messages: any;
-userId: any;
-username: any;
-userQuote: string;
+  newChat: string;
+  _messages: any;
+  userId: any;
+  username: any;
+  userQuote: string;
+  profile: any;
 
-  constructor(private toastr: ToastrService, private authService: AuthService, private router:Router, private chatService: ChatService) {
+  constructor(private toastr: ToastrService, private authService: AuthService, private router: Router, private chatService: ChatService) {
     this.newChat = '';
     this.userId = window.localStorage.getItem('userId');
     this.username = window.localStorage.getItem('username');
+    this.profile = window.localStorage.getItem('profile') ? window.localStorage.getItem('profile') : 'assets/219988.png';
     this.userQuote = '';
-   }
-
-logout() {
-this.authService.logout();
-this.router.navigate(['/login']);
-}
-
-addChat() {
-  this.chatService.addChat(this.newChat).then(result => {
-    // refresh the list
-    this.ngOnInit();
-    // clear the input field
-    this.newChat = '';
-  });
   }
 
-  deleteChat(id:number) {
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  addChat() {
+    this.chatService.addChat(this.newChat).then(result => {
+      // refresh the list
+      this.ngOnInit();
+      // clear the input field
+      this.newChat = '';
+    });
+  }
+
+  deleteChat(id: number) {
     this.chatService.deleteChat(id).then(result => {
       // refresh the list
       this.ngOnInit();
     });
-    }
+  }
 
   quote() {
     this.chatService.getQuotesFromApi().then(result => {
@@ -55,13 +57,11 @@ addChat() {
   }
 
 
-ngOnInit() {
-  this.chatService.getChatsFromApi().then(result => {
-    console.log(result);
-    this._messages = result;
-  })
-
-
-}
+  ngOnInit() {
+    this.chatService.getChatsFromApi().then(result => {
+      console.log(result);
+      this._messages = result;
+    })
+  }
 
 }

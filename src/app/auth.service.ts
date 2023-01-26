@@ -11,6 +11,7 @@ export class AuthService {
   logout () {
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('userId');
+    window.localStorage.removeItem('profile');
   }
 
   constructor() { }

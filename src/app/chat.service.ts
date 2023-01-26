@@ -70,12 +70,13 @@ export class ChatService {
       })
   }
 
-  register(name: string, email: string, password: string) {
+  register(name: string, email: string, password: string, profile: string) {
 
     console.log(JSON.stringify({
       name: name,
       email: email,
-      password: password
+      password: password,
+      profile: profile
     }));
     fetch(this.url + '/users', {
       method: 'POST',
@@ -85,7 +86,8 @@ export class ChatService {
       body: JSON.stringify({
         name: name,
         email: email,
-        password: password
+        password: password,
+        profile: profile
       })
     })
       .then(response => {
@@ -114,6 +116,7 @@ export class ChatService {
           if (res) {
             window.localStorage.setItem('username', username);
             window.localStorage.setItem('userId', data[0].id);
+            if (data[0].profile) { window.localStorage.setItem('profile', data[0].profile)};
             this.router.navigate(['/secure']);
           } else {
             this.toastr.warning('Whoops', 'Something went wrong');

@@ -4,7 +4,11 @@
             <img src="https://www.syntra-limburg.be/themes/custom/sassy/assets/images/syntra/logo.svg" class="img-fluid"
                 alt="logo" width="150px">
         </div>
-        <h1 class="main">welcome {{username}}</h1>
+        <h1 class="main">
+            <img class="profilepic" [src]="profile" width="100px"> 
+            Welcome {{username}}! 
+        </h1>
+        
         <div class="mb-3">
             <p class="btn btn-dark" (click)="quote()">Random quote</p>
             <a href="" class="register" (click)="logout()">Logout</a>
@@ -12,9 +16,12 @@
             <label for="exampleInputEmail1" class="form-label">add message and press enter</label>
             <input type="text" class="form-control keyup" [(ngModel)]="newChat" (keyup.enter)="addChat()">
            
+        
             <div class="chatsframe">
                 <p class="chat" *ngFor="let _message of _messages">
-                    <span class="chatname">{{_message.name}}</span>
+                    <span class="chatname">
+                        <img [src]="_message.profile ? _message.profile : 'assets/219988.png'" width="20px" class="img-fluid" alt="profile">
+                        {{_message.name}}</span>
                     <span class="chatmessage">
                         <button *ngIf="userId == 25 || userId == _message.userId" (click)='deleteChat(_message.id)' class="btn btn-danger btn-sm"> x </button>
                       
