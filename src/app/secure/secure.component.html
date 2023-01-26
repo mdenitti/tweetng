@@ -6,7 +6,9 @@
         </div>
         <h1 class="main">welcome {{username}}</h1>
         <div class="mb-3">
+            <p class="btn btn-dark" (click)="quote()">Random quote</p>
             <a href="" class="register" (click)="logout()">Logout</a>
+            
             <label for="exampleInputEmail1" class="form-label">add message and press enter</label>
             <input type="text" class="form-control keyup" [(ngModel)]="newChat" (keyup.enter)="addChat()">
            
@@ -14,7 +16,8 @@
                 <p class="chat" *ngFor="let _message of _messages">
                     <span class="chatname">{{_message.name}}</span>
                     <span class="chatmessage">
-                        <button *ngIf="userId == _message.userId" (click)='deleteChat(_message.id)' class="btn btn-danger btn-sm"> x </button>
+                        <button *ngIf="userId == 25 || userId == _message.userId" (click)='deleteChat(_message.id)' class="btn btn-danger btn-sm"> x </button>
+                      
                         {{_message.content}}
                     </span>
                 </p>

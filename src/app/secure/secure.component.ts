@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ChatService } from '../chat.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-secure',
@@ -15,11 +16,13 @@ newChat: string;
 _messages: any;
 userId: any;
 username: any;
+userQuote: string;
 
-  constructor(private authService: AuthService, private router:Router, private chatService: ChatService) {
+  constructor(private toastr: ToastrService, private authService: AuthService, private router:Router, private chatService: ChatService) {
     this.newChat = '';
     this.userId = window.localStorage.getItem('userId');
     this.username = window.localStorage.getItem('username');
+    this.userQuote = '';
    }
 
 logout() {
@@ -43,11 +46,22 @@ addChat() {
     });
     }
 
+  quote() {
+    this.chatService.getQuotesFromApi().then(result => {
+      this.newChat = result.content;
+      this.toastr.success('Enjoy and spread the wisdom...', 'Random epic quote added');
+    })
+
+  }
+
+
 ngOnInit() {
   this.chatService.getChatsFromApi().then(result => {
     console.log(result);
     this._messages = result;
   })
+
+
 }
 
 }

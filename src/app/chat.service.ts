@@ -18,6 +18,22 @@ export class ChatService {
 
   constructor(private router: Router, private toastr: ToastrService) { }
 
+
+
+  getQuotesFromApi() {
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'mohAZMB639mshMNGWzZTvC0upBBvp1oB5Pljsn0F00aaI7bO0p',
+        'X-RapidAPI-Host': 'quotes15.p.rapidapi.com'
+      }
+    };
+    
+    return fetch('https://quotes15.p.rapidapi.com/quotes/random/', options)
+      .then(response => response.json())
+  }
+
   addChat(message: string) {
     // check if object is properly created
     console.log(JSON.stringify({
