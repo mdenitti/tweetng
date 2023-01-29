@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ChatService {
 
+
   url: string = 'https://hellocode.be/tweet/public/api';
 
 
@@ -29,7 +30,7 @@ export class ChatService {
         'X-RapidAPI-Host': 'quotes15.p.rapidapi.com'
       }
     };
-    
+
     return fetch('https://quotes15.p.rapidapi.com/quotes/random/', options)
       .then(response => response.json())
   }
@@ -116,7 +117,7 @@ export class ChatService {
           if (res) {
             window.localStorage.setItem('username', username);
             window.localStorage.setItem('userId', data[0].id);
-            if (data[0].profile) { window.localStorage.setItem('profile', data[0].profile)};
+            if (data[0].profile) { window.localStorage.setItem('profile', data[0].profile) };
             this.router.navigate(['/secure']);
           } else {
             this.toastr.warning('Whoops', 'Something went wrong');
@@ -128,4 +129,34 @@ export class ChatService {
         else this.toastr.error('Error', 'An error occured');
       });
   }
+
+  likeChat(id: number) {
+    // check if object is properly created
+    console.log(JSON.stringify({
+      message_id: id,
+      user_id: window.localStorage.getItem('userId')
+    }));
+    // fetch the API in post mode
+    return fetch(this.url + '/like', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message_id: id,
+        user_id: window.localStorage.getItem('userId')
+      })
+    })
+      .then(response => {
+        console.log(response.status);
+        if (response.status == 201) {
+          // display a succes message to the user - optional
+          // alert("Message added");
+        } else {
+          this.toastr.warning('Whoops', 'Something went wrong');
+        }
+      })
+  }
+
+
 }

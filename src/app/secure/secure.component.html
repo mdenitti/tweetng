@@ -24,7 +24,16 @@
                         {{_message.name}}</span>
                     <span class="chatmessage">
                         <button *ngIf="userId == 25 || userId == _message.userId" (click)='deleteChat(_message.id)' class="btn btn-danger btn-sm"> x </button>
-                      
+                        <button *ngIf="userId == 25 || (userId != _message.userId)" (click)='likeChat(_message.id)' class="btn btn-primary btn-sm" [ngClass]="{'btn-secondary': _message.likes_count == 0}">
+                            <ng-container *ngIf="_message.likes_count > 0">
+                              likes {{_message.likes_count}}
+                              <span class='popular' *ngIf="_message.likes_count > 5"> popular</span>
+                            </ng-container>
+                            <ng-container *ngIf="_message.likes_count == 0">
+                                like
+                              </ng-container>
+                          </button>
+
                         {{_message.content}}
                     </span>
                 </p>

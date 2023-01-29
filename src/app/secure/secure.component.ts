@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SecureComponent {
 
 
+
   newChat: string;
   _messages: any;
   userId: any;
@@ -56,10 +57,16 @@ export class SecureComponent {
 
   }
 
+  likeChat(id: any) {
+    this.chatService.likeChat(id).then(result => {
+      // refresh the list
+      this.ngOnInit();
+    });
+    }
+
 
   ngOnInit() {
     this.chatService.getChatsFromApi().then(result => {
-      console.log(result);
       this._messages = result;
     })
   }
