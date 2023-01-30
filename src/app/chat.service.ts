@@ -130,6 +130,9 @@ export class ChatService {
       });
   }
 
+
+  ////// LIKES ///////////////////////////////////////////////////////////////////////////////////////// 
+
   likeChat(id: number) {
     // check if object is properly created
     console.log(JSON.stringify({
@@ -156,6 +159,35 @@ export class ChatService {
           this.toastr.warning('Whoops', 'Something went wrong');
         }
       })
+  }
+
+  ////// EMOTICONS ///////////////////////////////////////////////////////////////////////////////////////// 
+
+  getEmoticonsFromApi() {
+    return fetch(this.url + '/emoticons')
+      .then(response => response.json())
+  }
+
+  postEmoticonToApi(postEmoticon: { chat_id: any; user_id: any; emoticon_id: any; }) {
+    return fetch(this.url + '/emoticons', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id: postEmoticon.chat_id,
+        user_id: window.localStorage.getItem('userId'),
+        emoticon_id: postEmoticon.emoticon_id
+      })
+    })
+      .then(response => {
+        console.log(response.status);
+        if (response.status == 201) {
+          this.toastr.success('Spread the friggin joy with visual emotions', 'Emoticon added');
+        } else {
+          this.toastr.warning('Whoops', 'Something went wrong');
+        }
+      });
   }
 
 

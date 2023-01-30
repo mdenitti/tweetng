@@ -11,14 +11,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SecureComponent {
 
-
-
   newChat: string;
   _messages: any;
   userId: any;
   username: any;
   userQuote: string;
   profile: any;
+  _emoticons: any;
+  showEmoticons: boolean;
 
   constructor(private toastr: ToastrService, private authService: AuthService, private router: Router, private chatService: ChatService) {
     this.newChat = '';
@@ -26,6 +26,7 @@ export class SecureComponent {
     this.username = window.localStorage.getItem('username');
     this.profile = window.localStorage.getItem('profile') ? window.localStorage.getItem('profile') : 'assets/219988.png';
     this.userQuote = '';
+    this.showEmoticons = false;
   }
 
   logout() {
@@ -64,11 +65,27 @@ export class SecureComponent {
     });
     }
 
+    addEmoticon(eID: any, cID: any) {
+      let postEmoticon = {
+        chat_id : cID,
+        user_id : this.userId,
+        emoticon_id : eID
+      }
+      console.log(postEmoticon);
+      this.chatService.postEmoticonToApi(postEmoticon).then((result: any) => {
+        // refresh the list
+        this.ngOnInit();
+      });
+  }
+
 
   ngOnInit() {
     this.chatService.getChatsFromApi().then(result => {
       this._messages = result;
-    })
+    });
+    this.chatService.getEmoticonsFromApi().then(result => {
+      this._emoticons = result;
+    });
   }
 
 }
