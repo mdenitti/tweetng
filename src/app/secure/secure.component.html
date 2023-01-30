@@ -38,10 +38,10 @@
                               </ng-container>
                           </button>
 
-                        {{_message.content}}
+                        {{_message.content}} <span class="emotitems" [innerHTML]="_message.value"></span>
                     </span>
 
-                    <span class="emoticons-header" (click)="_message.showEmoticons = !_message.showEmoticons">Emoticons</span>
+                    <span class="emoticons-header" (click)="_message.showEmoticons = !_message.showEmoticons">Add emoticons</span>
                     <span class="emoticons-content" *ngIf="_message.showEmoticons">
                       <span *ngFor="let _emoticon of _emoticons" (click)="addEmoticon(_emoticon.id, _message.id)">
                         <span class="emotitems" [innerHTML]="_emoticon.value"></span>
